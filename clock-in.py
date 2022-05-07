@@ -8,7 +8,7 @@ import re
 import datetime
 import time
 import sys
-
+import verify
 
 class DaKa(object):
     """Hit card class
