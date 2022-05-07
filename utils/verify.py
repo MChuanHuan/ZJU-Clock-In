@@ -7,7 +7,7 @@ class getcode():
     
     def get_photo(self):
         try:
-            with open('verify.png', 'wb') as f:
+            with open('./utils/verify.png', 'wb') as f:
                 f.write(self.res)
             return True
 
