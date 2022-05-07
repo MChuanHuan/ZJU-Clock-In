@@ -7,7 +7,7 @@ class getcode():
     
     def get_photo(self):
         try:
-            with open('./verify.png', 'wb') as f:
+            with open('verify.png', 'wb') as f:
                 f.write(self.res)
             return True
 
@@ -17,7 +17,7 @@ class getcode():
 
     def parse(self):
         ocr = ddddocr.DdddOcr(show_ad=False,old=True)
-        with open('./verify.png', 'rb') as f:
+        with open('verify.png', 'rb') as f:
             image = f.read()
         res = ocr.classification(image)
         print('验证码识别结果：',res)
