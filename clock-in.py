@@ -85,6 +85,18 @@ class DaKa(object):
             new_id = new_info_tmp['id']
             name = re.findall(r'realname: "([^\"]+)",', html)[0]
             number = re.findall(r"number: '([^\']+)',", html)[0]
+            try:
+                res = self.sess.get(self.imgaddress, headers=self.headers)
+                code_get = verify.getcode(res.content)
+                code = code_get.main()
+                if not code :
+                    self.Push('验证码识别失败，请重试')
+                    return
+                else:
+                    self.Push('验证码识别成功，请稍后')
+            except:
+                print('验证码识别失败')
+                
         except IndexError:
             raise RegexMatchError('Relative info not found in html with regex')
         except json.decoder.JSONDecodeError:
@@ -109,6 +121,7 @@ class DaKa(object):
         new_info['jcqzrq'] = ""
         new_info['gwszdd'] = ""
         new_info['szgjcs'] = ""
+        new_info['verifyCode'] = code
         self.info = new_info
         return new_info
 
